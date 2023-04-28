@@ -64,13 +64,25 @@ fig4.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 st.write(fig4)
 
 DeathsPerCaseEthnicities = df[["DeathsPerCase", "WAC", "BAC", "H", "IAC", "AAC", "NAC"]].dropna()
-X = DeathsPerCaseEthnicities[["WAC", "BAC", "H", "IAC", "AAC", "NAC"]]
-y = DeathsPerCaseEthnicities["DeathsPerCase"]
+X1 = DeathsPerCaseEthnicities[["WAC", "BAC", "H", "IAC", "AAC", "NAC"]]
+y1 = DeathsPerCaseEthnicities["DeathsPerCase"]
+
+regr1 = linear_model.LinearRegression()
+regr1.fit(X1, y1)
+
+X2_1 = sm.add_constant(X1)
+est1_1 = sm.OLS(y1, X2_1)
+est2_1 = est1_1.fit()
+st.write(est2_1.summary())
+
+DPCEthnicitiesUninsured = df[["DeathsPerCase", "UninsuredRate", "WAC", "BAC", "H", "IAC", "AAC", "NAC"]].dropna()
+X2 = DPCEthnicitiesUninsured[["UninsuredRate", "WAC", "BAC", "H", "IAC", "AAC", "NAC"]]
+y2 = DPCEthnicitiesUninsured["DeathsPerCase"]
 
 regr = linear_model.LinearRegression()
-regr.fit(X, y)
+regr.fit(X2, y2)
 
-X2 = sm.add_constant(X)
-est = sm.OLS(y, X2)
-est2 = est.fit()
-st.write(est2.summary())
+X2_2 = sm.add_constant(X2)
+est1_2 = sm.OLS(y2, X2_2)
+est2_2 = est1_2.fit()
+st.write(est2_2.summary())
