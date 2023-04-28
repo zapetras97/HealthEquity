@@ -29,6 +29,10 @@ fig1 = px.choropleth(df, geojson=counties, locations='FIPS', color='DeathsPerCas
                            scope="usa",
                            labels={'DeathsPerCase':'Deaths per New Case Rate'},
                            hover_name = 'County',
+                           hover_data={'FIPS': False, 'Deaths Per Case' : 'DeathsPerCase', 'Age-Adjusted New Case Rate': 'CaseRate', 'Uninsured Rate' : 'UninsuredRate',
+                                       'White Alone or in Combination':'WAC', 'Black or African American Alone or in Combination':'BAC', 
+                                       'American Indian and Alaska Native Alone or in Combination': 'IAC', 'Asian Alone or in Combination': 'AAC', 
+                                       'Native Hawaiian and Other Pacific Islander Alone or in Combination': 'NAC'}
                           )
 fig1.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 st.write(fig1)
