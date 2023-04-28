@@ -6,7 +6,7 @@ import plotly.express as px
 from sklearn import linear_model
 import statsmodels.api as sm
 
-'''Load Data'''
+#Load Data
 
 with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
     counties = json.load(response)
@@ -17,7 +17,7 @@ def p2f(x):
     else:
         return float(x.rstrip('%'))/100
 
-''''''
+
 
 df = pd.read_csv('https://raw.githubusercontent.com/zapetras97/HealthEquity/main/Data/Tabular%20data%20table.csv', 
                  header = 0, 
@@ -27,7 +27,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/zapetras97/HealthEquity/main
                              "AAC":p2f, "NAC":p2f}, 
                  dtype = {"FIPS": str})
 
-'''Create Maps'''
+#Create Maps
 
 fig1 = px.choropleth(df, geojson=counties, locations='FIPS', color='DeathsPerCase',
                      title = "Deaths per New Case Rate by County",
@@ -84,7 +84,7 @@ fig4 = px.choropleth(df, geojson=counties, locations='FIPS', color='UninsuredRat
 fig4.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 #st.write(fig4)
 
-'''Regression Analysis'''
+#Regression Analysis
 
 # DPC, no extra variables
 
@@ -244,7 +244,7 @@ est2_NC_PU = est1_NC_PU.fit()
 
 
 
-'''Streamlit Setup'''
+#sStreamlit Setup
 
 st.set_page_config(layout="wide")
 
