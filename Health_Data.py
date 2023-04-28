@@ -21,9 +21,7 @@ fig = px.choropleth(deaths, geojson=counties, locations='FIPS', color='DeathsPer
                            color_continuous_scale="OrRd",
                            range_color=(0.1886, 0.481),
                            scope="usa",
-                           labels={'DeathsPerCase':'Deaths per New Case Rate'},
-                           hover_name = 'County', 
-                           hover_data = 'County'
+                           labels={'DeathsPerCase':'Deaths per New Case Rate'}
                           )
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 st.write(fig)
