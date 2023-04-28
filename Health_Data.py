@@ -20,7 +20,7 @@ def p2f(x):
     else:
         return float(x.rstrip('%'))/100
 
-df = pd.read_csv('https://github.com/zapetras97/HealthEquity/blob/main/Data/Tabular%20data%20table.csv', header = 0, names = ["FIPS", "County", "TOT_POP", "DeathsPerCase", "DeathRate", "CaseRate", "UninsuredRate", "WAC", "BAC", "H", "IAC", "AAC", "NAC"], converters={'DeathsPerCase':p2f, "UninsuredRate":p2f, "WAC":p2f, "BAC":p2f, "H":p2f, "IAC":p2f, "AAC":p2f, "NAC":p2f}, dtype = {"FIPS": str})
+df = pd.read_csv('https://raw.githubusercontent.com/zapetras97/HealthEquity/main/Data/Tabular%20data%20table.csv', header = 0, names = ["FIPS", "County", "TOT_POP", "DeathsPerCase", "DeathRate", "CaseRate", "UninsuredRate", "WAC", "BAC", "H", "IAC", "AAC", "NAC"], converters={'DeathsPerCase':p2f, "UninsuredRate":p2f, "WAC":p2f, "BAC":p2f, "H":p2f, "IAC":p2f, "AAC":p2f, "NAC":p2f}, dtype = {"FIPS": str})
 deaths = df[["FIPS", "DeathsPerCase"]]
 fig = px.choropleth(deaths, geojson=counties, locations='FIPS', color='DeathsPerCase',
                            color_continuous_scale="OrRd",
