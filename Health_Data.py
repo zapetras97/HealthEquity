@@ -37,8 +37,6 @@ fig1 = px.choropleth(df, geojson=counties, locations='FIPS', color='DeathsPerCas
                      hover_name = 'County',
                      hover_data={'FIPS': False, 'TOT_POP':True, 'DeathsPerCase':':.3f', 'CaseRate':':.3f', 'UninsuredRate' : ':.3f', 'WAC':':.3f', 'BAC':':.3f', 
                                  'IAC':':.3f', 'AAC':':.3f', 'NAC':':.3f'},
-                     width = 1200,
-                     height = 600
                     )
 fig1.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 #st.write(fig1)
@@ -244,54 +242,68 @@ est2_NC_PU = est1_NC_PU.fit()
 
 st.set_page_config(layout="wide")
 
+
 with st.sidebar:
     mapToDisplay = st.radio("Select which map to display", ('Deaths Per Case', 'Death Rate', 'New Case Rate', 'Uninsured Rate'))
     regressionVar = st.radio("Select regression analysis Y variable", ('Deaths Per Case', 'Death Rate', 'New Case Rate'))
     st.write("Additional explanatory variables:")
     uninsured = st.checkbox('Uninsured Rate')
     population = st.checkbox('Population')
-    
+
+st.title("Healthy Inequity in Cancer Cases and Deaths")    
 
 if mapToDisplay == 'Deaths Per Case':
-    st.title("Deaths per New Case Rate by County")
+    st.header("Deaths per New Case Rate by County")
     st.write(fig1)
 elif mapToDisplay == 'Death Rate':
-    st.title("Age-Adjusted Deaths per 100,000 Case Rate by County")
+    st.header("Age-Adjusted Deaths per 100,000 Case Rate by County")
     st.write(fig2)
 elif mapToDisplay == 'New Case Rate':
-    st.title("Age-Adjusted New Cases per 100,000 Case Rate by County")
+    st.header("Age-Adjusted New Cases per 100,000 Case Rate by County")
     st.write(fig3)
 else:
-    st.title("Rate of Uninsured Population by County")
+    st.header("Rate of Uninsured Population by County")
     st.write(fig4)
     
 if regressionVar == 'Deaths Per Case':
     if uninsured and population:
+        st.header("Correlation of Deaths per New Case with Ethnicity, Uninsured Rate, and Population")
         st.write(est2_DPC_PU.summary())
     elif uninsured:
+        st.header("Correlation of Deaths per New Case with Ethnicity and Uninsured Rate")
         st.write(est2_DPC_U.summary())
     elif population:
+        st.header("Correlation of Deaths per New Case with Ethnicity and Population")
         st.write(est2_DPC_P.summary())
     else:
+        st.header("Correlation of Deaths per New Case with Ethnicity")
         st.write(est2_DPC.summary())
         
 elif regressionVar == 'Death Rate':
     if uninsured and population:
+        st.header("Correlation of Deaths per 100,000 with Ethnicity, Uninsured Rate, and Population")
         st.write(est2_DR_PU.summary())
     elif uninsured:
+        st.header("Correlation of Deaths per 100,000 with Ethnicity and Uninsured Rate")
         st.write(est2_DR_U.summary())
     elif population:
+        st.header("Correlation of Deaths per 100,000 with Ethnicity and Population")
         st.write(est2_DR_P.summary())
     else:
+        st.header("Correlation of Deaths per 100,000 with Ethnicity")
         st.write(est2_DR.summary())
 else:
     if uninsured and population:
+        st.header("Correlation of New Cases per 100,000 with Ethnicity, Uninsured Rate, and Population")
         st.write(est2_NC_PU.summary())
     elif uninsured:
+        st.header("Correlation of New Cases per 100,000 with Ethnicity, and Uninsured Rate")
         st.write(est2_NC_U.summary())
     elif population:
+        st.header("Correlation of New Cases per 100,000 with Ethnicityand Population")
         st.write(est2_NC_P.summary())
     else:
+        st.header("Correlation of New Cases per 100,000 with Ethnicity")
         st.write(est2_NC.summary())
 
 
