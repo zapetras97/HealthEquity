@@ -53,6 +53,16 @@ fig3 = px.choropleth(df, geojson=counties, locations='FIPS', color='CaseRate',
 fig3.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 st.write(fig3)
 
+fig4 = px.choropleth(df, geojson=counties, locations='FIPS', color='UninsuredRate',
+                           color_continuous_scale="OrRd",
+                           range_color=(0.0144, 0.3245),
+                           scope="usa",
+                           labels={'UninsuredRate':'Rate of Uninsured Population'},
+                           hover_name = 'County',
+                          )
+fig4.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+st.write(fig4)
+
 DeathsPerCaseEthnicities = df[["DeathsPerCase", "WAC", "BAC", "H", "IAC", "AAC", "NAC"]].dropna()
 X = DeathsPerCaseEthnicities[["WAC", "BAC", "H", "IAC", "AAC", "NAC"]]
 y = DeathsPerCaseEthnicities["DeathsPerCase"]
