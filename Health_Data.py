@@ -73,25 +73,18 @@ fig4.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 #st.write(fig4)
 
 st.set_page_config(layout="wide")
-col1, col2, = st.beta_columns((1,11))
 
-with col1:
+with st.sidebar:
     mapToDisplay = st.radio("Select which map to display", ('Deaths Per Case', 'Death Rate', 'New Case Rate', 'Uninsured Rate'))
-    
-with col2:
-    if mapToDisplay == 'Deaths Per Case':
-        st.write(fig1)
-    elif mapToDisplay == 'Death Rate':
-        st.write(fig2)
-    elif mapToDisplay == 'New Case Rate':
-        st.write(fig3)
-    else:
-        st.write(fig4)
 
-
-
-
-
+if mapToDisplay == 'Deaths Per Case':
+    st.write(fig1)
+elif mapToDisplay == 'Death Rate':
+    st.write(fig2)
+elif mapToDisplay == 'New Case Rate':
+    st.write(fig3)
+else:
+    st.write(fig4)
 
 DeathsPerCaseEthnicities = df[["DeathsPerCase", "WAC", "BAC", "H", "IAC", "AAC", "NAC"]].dropna()
 X1 = DeathsPerCaseEthnicities[["WAC", "BAC", "H", "IAC", "AAC", "NAC"]]
