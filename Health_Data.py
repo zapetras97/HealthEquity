@@ -33,15 +33,25 @@ fig1 = px.choropleth(df, geojson=counties, locations='FIPS', color='DeathsPerCas
 fig1.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 st.write(fig1)
 
-fig2 = px.choropleth(df, geojson=counties, locations='FIPS', color='CaseRate',
+fig2 = px.choropleth(df, geojson=counties, locations='FIPS', color='DeathRate',
                            color_continuous_scale="OrRd",
-                           range_color=(142.2, 1204),
+                           range_color=(58.4, 387.9),
                            scope="usa",
-                           labels={'CaseRate':'Age-Adjusted New Case Rate'},
+                           labels={'DeathRate':'Age-Adjusted Death Rate'},
                            hover_name = 'County',
                           )
 fig2.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 st.write(fig2)
+
+fig3 = px.choropleth(df, geojson=counties, locations='FIPS', color='CaseRate',
+                           color_continuous_scale="OrRd",
+                           range_color=(142.2, 659.2),
+                           scope="usa",
+                           labels={'CaseRate':'Age-Adjusted New Case Rate'},
+                           hover_name = 'County',
+                          )
+fig3.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+st.write(fig3)
 
 DeathsPerCaseEthnicities = df[["DeathsPerCase", "WAC", "BAC", "H", "IAC", "AAC", "NAC"]].dropna()
 X = DeathsPerCaseEthnicities[["WAC", "BAC", "H", "IAC", "AAC", "NAC"]]
