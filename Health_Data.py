@@ -24,65 +24,73 @@ df = pd.read_csv('https://raw.githubusercontent.com/zapetras97/HealthEquity/main
                  dtype = {"FIPS": str})
 
 fig1 = px.choropleth(df, geojson=counties, locations='FIPS', color='DeathsPerCase',
-                           color_continuous_scale="OrRd",
+                           color_continuous_scale="YlOrRd",
                            range_color=(0.1886, 0.481),
                            scope="usa",
                            labels={'DeathsPerCase':'Deaths per New Case Rate'},
-                           
                            hover_name = 'County',
-                           hover_data={'FIPS': False, 'DeathsPerCase':True, 'CaseRate':True, 'UninsuredRate' : True, 'WAC':True, 'BAC':True, 'IAC':True, 'AAC':True, 
-                                       'NAC':True}
+                           hover_data={'FIPS': False, 'DeathsPerCase':':.3f', 'CaseRate':':.3f', 'UninsuredRate' : ':.3f', 'WAC':':.3f', 'BAC':':.3f', 'IAC':':.3f',
+                                       'AAC':':.3f', 'NAC':':.3f'}
                           )
 fig1.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 #st.write(fig1)
 
 
 fig2 = px.choropleth(df, geojson=counties, locations='FIPS', color='DeathRate',
-                           color_continuous_scale="OrRd",
+                           color_continuous_scale="YlOrRd",
                            range_color=(58.4, 387.9),
                            scope="usa",
                            labels={'DeathRate':'Age-Adjusted Death Rate'},
                            hover_name = 'County',
-                           hover_data={'FIPS': False, 'DeathsPerCase':True, 'CaseRate':True, 'UninsuredRate' : True, 'WAC':True, 'BAC':True, 'IAC':True, 'AAC':True, 
-                                       'NAC':True}
+                           hover_data={'FIPS': False, 'DeathsPerCase':':.3f', 'CaseRate':':.3f', 'UninsuredRate' : ':.3f', 'WAC':':.3f', 'BAC':':.3f', 'IAC':':.3f',
+                                       'AAC':':.3f', 'NAC':':.3f'}
                           )
 fig2.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 #st.write(fig2)
 
 fig3 = px.choropleth(df, geojson=counties, locations='FIPS', color='CaseRate',
-                           color_continuous_scale="OrRd",
+                           color_continuous_scale="YlOrRd",
                            range_color=(142.2, 659.2),
                            scope="usa",
                            labels={'CaseRate':'Age-Adjusted New Case Rate'},
                            hover_name = 'County',
-                           hover_data={'FIPS': False, 'DeathsPerCase':True, 'CaseRate':True, 'UninsuredRate' : True, 'WAC':True, 'BAC':True, 'IAC':True, 'AAC':True, 
-                                       'NAC':True}
+                           hover_data={'FIPS': False, 'DeathsPerCase':':.3f', 'CaseRate':':.3f', 'UninsuredRate' : ':.3f', 'WAC':':.3f', 'BAC':':.3f', 'IAC':':.3f',
+                                       'AAC':':.3f', 'NAC':':.3f'}
                           )
 fig3.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 #st.write(fig3)
 
 fig4 = px.choropleth(df, geojson=counties, locations='FIPS', color='UninsuredRate',
-                           color_continuous_scale="OrRd",
+                           color_continuous_scale="YlOrRd",
                            range_color=(0.0144, 0.3245),
                            scope="usa",
                            labels={'UninsuredRate':'Rate of Uninsured Population'},
                            hover_name = 'County',
-                           hover_data={'FIPS': False, 'DeathsPerCase':True, 'CaseRate':True, 'UninsuredRate' : True, 'WAC':True, 'BAC':True, 'IAC':True, 'AAC':True, 
-                                       'NAC':True}
+                           hover_data={'FIPS': False, 'DeathsPerCase':':.3f', 'CaseRate':':.3f', 'UninsuredRate' : ':.3f', 'WAC':':.3f', 'BAC':':.3f', 'IAC':':.3f',
+                                       'AAC':':.3f', 'NAC':':.3f'}
                           )
 fig4.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 #st.write(fig4)
 
-mapToDisplay = st.radio("Select which map to display", ('Deaths Per Case', 'Death Rate', 'New Case Rate', 'Uninsured Rate'))
+st.set_page_config(layout="wide")
+col1, col2, = st.beta_columns((4,1))
 
-if mapToDisplay == 'Deaths Per Case':
-    st.write(fig1)
-elif mapToDisplay == 'Death Rate':
-    st.write(fig2)
-elif mapToDisplay == 'New Case Rate':
-    st.write(fig3)
-else:
-    st.write(fig4)
+with col2:
+    mapToDisplay = st.radio("Select which map to display", ('Deaths Per Case', 'Death Rate', 'New Case Rate', 'Uninsured Rate'))
+    
+with col1:
+    if mapToDisplay == 'Deaths Per Case':
+        st.write(fig1)
+    elif mapToDisplay == 'Death Rate':
+        st.write(fig2)
+    elif mapToDisplay == 'New Case Rate':
+        st.write(fig3)
+    else:
+        st.write(fig4)
+
+
+
+
 
 
 DeathsPerCaseEthnicities = df[["DeathsPerCase", "WAC", "BAC", "H", "IAC", "AAC", "NAC"]].dropna()
