@@ -16,12 +16,14 @@ def p2f(x):
         return float(x.rstrip('%'))/100
 
 df = pd.read_csv('https://raw.githubusercontent.com/zapetras97/HealthEquity/main/Data/Tabular%20data%20table.csv', header = 0, names = ["FIPS", "County", "TOT_POP", "DeathsPerCase", "DeathRate", "CaseRate", "UninsuredRate", "WAC", "BAC", "H", "IAC", "AAC", "NAC"], converters={'DeathsPerCase':p2f, "UninsuredRate":p2f, "WAC":p2f, "BAC":p2f, "H":p2f, "IAC":p2f, "AAC":p2f, "NAC":p2f}, dtype = {"FIPS": str})
-deaths = df[["FIPS", "DeathsPerCase"]]
+deaths = df[["FIPS", "County", "DeathsPerCase"]]
 fig = px.choropleth(deaths, geojson=counties, locations='FIPS', color='DeathsPerCase',
                            color_continuous_scale="OrRd",
                            range_color=(0.1886, 0.481),
                            scope="usa",
-                           labels={'DeathsPerCase':'Deaths per New Case Rate'}
+                           labels={'DeathsPerCase':'Deaths per New Case Rate'},
+                           hover_name = 'County', 
+                           hover_data = 'County'
                           )
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 st.write(fig)
