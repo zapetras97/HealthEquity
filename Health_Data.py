@@ -30,7 +30,6 @@ df = pd.read_csv('https://raw.githubusercontent.com/zapetras97/HealthEquity/main
 #Create Maps
 
 fig1 = px.choropleth(df, geojson=counties, locations='FIPS', color='DeathsPerCase',
-                     title = "Deaths per New Case Rate by County",
                      color_continuous_scale="YlOrRd",
                      range_color=(0.1886, 0.481),
                      scope="usa",
@@ -38,15 +37,14 @@ fig1 = px.choropleth(df, geojson=counties, locations='FIPS', color='DeathsPerCas
                      hover_name = 'County',
                      hover_data={'FIPS': False, 'TOT_POP':True, 'DeathsPerCase':':.3f', 'CaseRate':':.3f', 'UninsuredRate' : ':.3f', 'WAC':':.3f', 'BAC':':.3f', 
                                  'IAC':':.3f', 'AAC':':.3f', 'NAC':':.3f'},
-                     width = 800,
-                     height = 400
+                     width = 1200,
+                     height = 600
                     )
 fig1.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 #st.write(fig1)
 
 
 fig2 = px.choropleth(df, geojson=counties, locations='FIPS', color='DeathRate',
-                     title = "Age-Adjusted Deaths per 100,000 Case Rate by County",
                      color_continuous_scale="YlOrRd",
                      range_color=(58.4, 387.9),
                      scope="usa",
@@ -59,7 +57,6 @@ fig2.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 #st.write(fig2)
 
 fig3 = px.choropleth(df, geojson=counties, locations='FIPS', color='CaseRate',
-                     title = "Age-Adjusted New Cases per 100,000 Case Rate by County",
                      color_continuous_scale="YlOrRd",
                      range_color=(142.2, 659.2),
                      scope="usa",
@@ -72,7 +69,6 @@ fig3.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 #st.write(fig3)
 
 fig4 = px.choropleth(df, geojson=counties, locations='FIPS', color='UninsuredRate',
-                     title = "Rate of Uninsured Population by County",
                      color_continuous_scale="YlOrRd",
                      range_color=(0.0144, 0.3245),
                      scope="usa",
@@ -257,12 +253,16 @@ with st.sidebar:
     
 
 if mapToDisplay == 'Deaths Per Case':
+    st.title("Deaths per New Case Rate by County")
     st.write(fig1)
 elif mapToDisplay == 'Death Rate':
+    st.title("Age-Adjusted Deaths per 100,000 Case Rate by County")
     st.write(fig2)
 elif mapToDisplay == 'New Case Rate':
+    st.title("Age-Adjusted New Cases per 100,000 Case Rate by County")
     st.write(fig3)
 else:
+    st.title("Rate of Uninsured Population by County")
     st.write(fig4)
     
 if regressionVar == 'Deaths Per Case':
