@@ -253,13 +253,13 @@ with st.sidebar:
 st.title("Healthy Inequity in Cancer Cases and Deaths")    
 
 if mapToDisplay == 'Deaths Per Case':
-    st.header("Deaths per New Case Rate by County")
+    st.header("Deaths per New Case by County")
     st.write(fig1)
 elif mapToDisplay == 'Death Rate':
-    st.header("Age-Adjusted Deaths per 100,000 Case Rate by County")
+    st.header("Age-Adjusted Deaths per 100,000 by County")
     st.write(fig2)
 elif mapToDisplay == 'New Case Rate':
-    st.header("Age-Adjusted New Cases per 100,000 Case Rate by County")
+    st.header("Age-Adjusted New Cases per 100,000 County")
     st.write(fig3)
 else:
     st.header("Rate of Uninsured Population by County")
