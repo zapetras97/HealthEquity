@@ -73,12 +73,12 @@ fig4.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 #st.write(fig4)
 
 st.set_page_config(layout="wide")
-col1, col2, = st.beta_columns((4,1))
+col1, col2, = st.beta_columns((1,11))
 
-with col2:
+with col1:
     mapToDisplay = st.radio("Select which map to display", ('Deaths Per Case', 'Death Rate', 'New Case Rate', 'Uninsured Rate'))
     
-with col1:
+with col2:
     if mapToDisplay == 'Deaths Per Case':
         st.write(fig1)
     elif mapToDisplay == 'Death Rate':
