@@ -28,11 +28,14 @@ fig1 = px.choropleth(df, geojson=counties, locations='FIPS', color='DeathsPerCas
                            range_color=(0.1886, 0.481),
                            scope="usa",
                            labels={'DeathsPerCase':'Deaths per New Case Rate'},
+                           
                            hover_name = 'County',
-                           hover_data={'FIPS': False, 'Deaths Per Case' : 'DeathsPerCase', 'Age-Adjusted New Case Rate': 'CaseRate', 'Uninsured Rate' : 'UninsuredRate',
-                                       'White Alone or in Combination':'WAC', 'Black or African American Alone or in Combination':'BAC', 
-                                       'American Indian and Alaska Native Alone or in Combination': 'IAC', 'Asian Alone or in Combination': 'AAC', 
-                                       'Native Hawaiian and Other Pacific Islander Alone or in Combination': 'NAC'}
+                           hovertemplate = 'Deaths Per Case: %{DeathsPerCase*100}%' + 'Age-Adjusted New Case Rate: %{CaseRate}' + 'Uninsured Rate: %{UninsuredRate}'
+                           
+                           #hover_data={'FIPS': False, 'DeathsPerCase':'Deaths Per Case', 'CaseRate':'Age-Adjusted New Case Rate', 'Uninsured Rate' : 'UninsuredRate',
+                                       #'White Alone or in Combination':'WAC', 'Black or African American Alone or in Combination':'BAC', 
+                                       #'American Indian and Alaska Native Alone or in Combination': 'IAC', 'Asian Alone or in Combination': 'AAC', 
+                                       #'Native Hawaiian and Other Pacific Islander Alone or in Combination': 'NAC'}
                           )
 fig1.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 st.write(fig1)
