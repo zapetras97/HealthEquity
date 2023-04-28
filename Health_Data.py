@@ -30,13 +30,12 @@ fig1 = px.choropleth(df, geojson=counties, locations='FIPS', color='DeathsPerCas
                            labels={'DeathsPerCase':'Deaths per New Case Rate'},
                            
                            hover_name = 'County',
-                           hover_data={'FIPS': False, 'DeathsPerCase':True, 'CaseRate':'Age-Adjusted New Case Rate', 'UninsuredRate' : 'Uninsured Rate',
-                                       'WAC':'White Alone or in Combination', 'BAC':'Black or African American Alone or in Combination', 
-                                       'IAC':'American Indian and Alaska Native Alone or in Combination', 'AAC':'Asian Alone or in Combination', 
-                                       'NAC':'Native Hawaiian and Other Pacific Islander Alone or in Combination'}
+                           hover_data={'FIPS': False, 'DeathsPerCase':True, 'CaseRate':True, 'UninsuredRate' : True, 'WAC':True, 'BAC':True, 'IAC':True, 'AAC':True, 
+                                       'NAC':True}
                           )
 fig1.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-st.write(fig1)
+#st.write(fig1)
+
 
 fig2 = px.choropleth(df, geojson=counties, locations='FIPS', color='DeathRate',
                            color_continuous_scale="OrRd",
@@ -44,9 +43,11 @@ fig2 = px.choropleth(df, geojson=counties, locations='FIPS', color='DeathRate',
                            scope="usa",
                            labels={'DeathRate':'Age-Adjusted Death Rate'},
                            hover_name = 'County',
+                           hover_data={'FIPS': False, 'DeathsPerCase':True, 'CaseRate':True, 'UninsuredRate' : True, 'WAC':True, 'BAC':True, 'IAC':True, 'AAC':True, 
+                                       'NAC':True}
                           )
 fig2.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-st.write(fig2)
+#st.write(fig2)
 
 fig3 = px.choropleth(df, geojson=counties, locations='FIPS', color='CaseRate',
                            color_continuous_scale="OrRd",
@@ -54,9 +55,11 @@ fig3 = px.choropleth(df, geojson=counties, locations='FIPS', color='CaseRate',
                            scope="usa",
                            labels={'CaseRate':'Age-Adjusted New Case Rate'},
                            hover_name = 'County',
+                           hover_data={'FIPS': False, 'DeathsPerCase':True, 'CaseRate':True, 'UninsuredRate' : True, 'WAC':True, 'BAC':True, 'IAC':True, 'AAC':True, 
+                                       'NAC':True}
                           )
 fig3.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-st.write(fig3)
+#st.write(fig3)
 
 fig4 = px.choropleth(df, geojson=counties, locations='FIPS', color='UninsuredRate',
                            color_continuous_scale="OrRd",
@@ -64,9 +67,23 @@ fig4 = px.choropleth(df, geojson=counties, locations='FIPS', color='UninsuredRat
                            scope="usa",
                            labels={'UninsuredRate':'Rate of Uninsured Population'},
                            hover_name = 'County',
+                           hover_data={'FIPS': False, 'DeathsPerCase':True, 'CaseRate':True, 'UninsuredRate' : True, 'WAC':True, 'BAC':True, 'IAC':True, 'AAC':True, 
+                                       'NAC':True}
                           )
 fig4.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-st.write(fig4)
+#st.write(fig4)
+
+mapToDisplay = st.radio("Select which map to display", ('Deaths Per Case', 'Death Rate', 'New Case Rate', 'Uninsured Rate'))
+
+if mapToDisplay == 'Deaths Per Case':
+    st.write(fig1)
+elif mapToDisplay == 'Death Rate':
+    st.write(fig2)
+elif mapToDisplay == 'New Case Rate':
+    st.write(fig3)
+else:
+    st.write(fig4)
+
 
 DeathsPerCaseEthnicities = df[["DeathsPerCase", "WAC", "BAC", "H", "IAC", "AAC", "NAC"]].dropna()
 X1 = DeathsPerCaseEthnicities[["WAC", "BAC", "H", "IAC", "AAC", "NAC"]]
